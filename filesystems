@@ -1,0 +1,209 @@
+* @(#)filesystems @(#)29	1.22  src/bos/etc/filesystems/filesystems, cmdfs, bos530 9/8/00 13:57:45
+* IBM_PROLOG_BEGIN_TAG 
+* This is an automatically generated prolog. 
+*  
+* bos530 src/bos/etc/filesystems/filesystems 1.22 
+*  
+* Licensed Materials - Property of IBM 
+*  
+* (C) COPYRIGHT International Business Machines Corp. 1985,1993 
+* All Rights Reserved 
+*  
+* US Government Users Restricted Rights - Use, duplication or 
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp. 
+*  
+* IBM_PROLOG_END_TAG 
+*
+* COMPONENT_NAME: CMDFS
+* 
+* FUNCTIONS: none 
+*
+* ORIGINS: 27 
+*
+* (C) COPYRIGHT International Business Machines Corp. 1985, 1993
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+*
+* This version of /etc/filesystems assumes that only the root file system
+* is created and ready.  As new file systems are added, change the check,
+* mount, free, log, vol and vfs entries for the appropriate stanza.
+*
+
+/:
+	dev		= /dev/hd4
+	vfs		= jfs2
+	log		= /dev/hd8
+	mount		= automatic
+	check		= false
+	type		= bootfs
+	vol		= root
+	free		= true
+
+/home:
+	dev		= /dev/hd1
+	vfs		= jfs2
+	log		= /dev/hd8
+	mount		= true
+	check		= true
+	vol		= /home
+	free		= false
+	quota		= userquota,groupquota
+
+/usr:
+	dev		= /dev/hd2
+	vfs		= jfs2
+	log		= /dev/hd8
+	mount		= automatic
+	check		= false
+	type		= bootfs
+	vol		= /usr
+	free		= false
+
+/var:
+	dev		= /dev/hd9var
+	vfs		= jfs2
+	log		= /dev/hd8
+	mount		= automatic
+	check		= false
+	type		= bootfs
+	vol		= /var
+	free		= false
+
+/tmp:
+	dev		= /dev/hd3
+	vfs		= jfs2
+	log		= /dev/hd8
+	mount		= automatic
+	check		= false
+	vol		= /tmp
+	free		= false
+
+/proc:
+	dev	  = /proc
+	vol	  = "/proc"
+	mount	  = true
+	check	  = false
+	free	  = false
+	vfs	  = procfs
+
+/opt:
+	dev		= /dev/hd10opt
+	vfs		= jfs2
+	log		= /dev/hd8
+	mount		= true
+	check		= true
+	vol		= /opt
+	free		= false
+
+/srv/mnt/dsk/cgx1lv:
+	dev		= /dev/cgx1lv
+	vfs		= jfs2
+	log		= /dev/loglv00
+	mount		= true
+	account		= true
+
+/export/lpp_source:
+	dev		= /dev/lpp_sourcelv
+	vfs		= jfs2
+	log		= /dev/loglv00
+	mount		= true
+	account		= true
+
+/export/spot:
+	dev		= /dev/spotlv
+	vfs		= jfs2
+	log		= /dev/loglv00
+	mount		= true
+	account		= true
+
+/export/images:
+	dev		= /dev/imageslv
+	vfs		= jfs2
+	log		= /dev/loglv00
+	mount		= true
+	account		= true
+
+/tftpboot:
+	dev		= /dev/tftpbootlv
+	vfs		= jfs2
+	log		= /dev/loglv00
+	mount		= true
+	account		= true
+
+/export/home:
+	dev		= /dev/fslv01
+	vfs		= jfs2
+	log		= /dev/loglv00
+	mount		= true
+	account		= true
+	quota		= userquota,groupquota
+
+/srv/mnt/dsk/fslv02:
+	dev		= /dev/fslv02
+	vfs		= jfs2
+	log		= /dev/loglv00
+	mount		= true
+	account		= true
+
+/srv:
+	dev		= /dev/hd11srv
+	vfs		= jfs2
+	log		= /dev/hd8
+	mount		= true
+	options		= rw
+	account		= false
+
+/srv/mnt/dsk/cgx8lv:
+	dev		= /dev/cgx8lv
+	vfs		= jfs2
+	log		= /dev/loglv00
+	mount		= true
+	options		= rw
+	account		= false
+
+/audit:
+	dev		= /dev/lv00
+	vfs		= jfs
+	log		= /dev/loglv01
+	mount		= true
+	options		= rw
+	account		= false
+
+/srv/mnt/dsk/cgxora101:
+	dev		= /dev/cgxora101lv
+	vfs		= jfs2
+	log		= /dev/loglv00
+	mount		= true
+	options		= rw
+	account		= true
+
+/admin:
+	dev       = /dev/hd11admin
+	vol       ="/admin"
+	mount     = true
+	check     = false
+	free      = false
+	vfs       = jfs2
+	log       = /dev/hd8
+
+/var/adm/ras/livedump:
+	dev		= /dev/livedump
+	vfs		= jfs2
+	log		= /dev/hd8
+	mount		= true
+	account		= false
+
+/srv/mnt/nfs/server-dir:
+	dev		= "/dir"
+	vfs		= nfs
+	nodename	= nfsserver
+	mount		= true
+	type		= nfs4
+	options		= fg,soft,intr,acl,retry=10,retrans=5,timeo=5,vers=4,nodev,nosuid,sec=sys
+	account		= false
+
