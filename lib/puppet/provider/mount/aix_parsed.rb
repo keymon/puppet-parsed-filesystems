@@ -93,15 +93,19 @@ class Puppet::Provider::Mount::Aix_Parsed < Puppet::Provider
         when :options then
           stanza[:options] = val
         when :device then
-          if 
+          if val =~ /^.*:.*/
+            stanza[:nodename] = val.split(':')[0]
+            stanza[:device] = val.split(':')[1]
+          else
+            stanza[:nodename] = nul
+            stanza[:device] = val
           end
-          stanza[:options] = val
         when :dump then
           true
         when :pass then
           true
         when :fstype then
-          true
+          stanza[:vfs] = val
         else         
           Puppet.debug "Unknown param '#{key.to_s}=#{val.to_s}' in  #{@resource.class.name} #{@resource.name}."
       end
